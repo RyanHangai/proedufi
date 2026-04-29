@@ -1,2 +1,2 @@
 all:
-	gcc src/*.c -o proedufi.out
+	gcc src/*.c -o proedufi
