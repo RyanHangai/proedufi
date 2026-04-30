@@ -109,6 +109,45 @@ bool validaEmail(char *email){
     return ehValido;
 }
 
+bool validaSenha(char *senha){
+    int tamanhoSenha = strlen(senha);
+    bool temMaiuscula = false;
+    bool temMinuscula = false;
+    bool temNumero = false;
+    bool temEspecial = false;
+    bool ehValido = false;
+
+    if(tamanhoSenha < 8 || tamanhoSenha > 128){
+        printf("A senha so pode ter entre 8 a 128 caracteres\n");
+        return ehValido;
+    }
+
+    for(int i = 0; i < tamanhoSenha; i++){
+
+        if(senha[i] == ' '){
+            printf("Nao pode ter espacos na senha\n");
+            return ehValido;
+        }
+
+        if(isupper(senha[i])){
+            temMaiuscula = true;
+        } else if(islower(senha[i])){
+            temMinuscula = true;
+        } else if(isdigit(senha[i])){
+            temNumero = true;
+        } else if(ispunct(senha[i])){
+            temEspecial = true;
+        }
+
+    }
+
+    if(temMaiuscula == true && temMinuscula == true && temNumero == true && temEspecial == true){
+        ehValido = true;
+    } else {
+        printf("A senha tem que ter maiusculas, minusculas, numeros e caracter especial (!@#%$&*)");
+    }
+    return ehValido;
+}
 
 void criarConta() {
 
@@ -130,12 +169,12 @@ void criarConta() {
     if(usuarioDigitou[0] == '0'){
         printf("Voce Voltou!\n\n");
         return;
-    } else if(usuarioDigitou[0] == '\n'){
+    } else if(usuarioDigitou[0] == '\n'){ // nao esta funcionando
         printf("Digite o seu nome primeiro!\n");
     } else if(strlen(usuarioDigitou) > 60){
         printf("Nome muito extenso, digite seu nome real!\n");
     } else if(validaNome(usuarioDigitou) == false){
-        printf("O nome so pode ter letras\n");
+        printf("O nome so pode ter letras\n"); // aqui ele proibe de ter espacos no nome, oq esta errado
     } else{
         strcpy(nome, usuarioDigitou);
     }
@@ -148,7 +187,7 @@ void criarConta() {
     if(usuarioDigitou[0] == '0'){
         printf("Voce Voltou!\n\n");
         return;
-    } else if(usuarioDigitou[0] == '\n'){
+    } else if(usuarioDigitou[0] == '\n'){ // nao esta funcionando
         printf("Digite o seu email primeiro!\n");
     } else if(validaEmail(usuarioDigitou) == false){
         printf("Digite um email valido\n");
@@ -156,6 +195,21 @@ void criarConta() {
         strcpy(email, usuarioDigitou);
     }
 
+    printf("Digite uma senha: ");
+
+    fgets(usuarioDigitou, 255, stdin);
+    limpaEspacoNoTexto(usuarioDigitou);
+
+    if(usuarioDigitou[0] == '0'){
+        printf("Voce Voltou!\n\n");
+        return;
+    } else if(usuarioDigitou[0] == '\n'){
+        printf("Digite o seu email primeiro!\n");
+    } else if(validaSenha(usuarioDigitou) == false){
+        printf("\n");
+    } else{
+        strcpy(senha, usuarioDigitou);
+    }
 }
 
 
