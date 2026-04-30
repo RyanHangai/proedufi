@@ -102,7 +102,7 @@ bool validaEmail(char *email){
         return ehValido;
     }
 
-    if(email[0] != '@' && email[0] != '.' && email[tamanhoEmail] != '@' && email[tamanhoEmail] != '.' ){
+    if(email[0] != '@' && email[0] != '.' && email[tamanhoEmail] != '@' && email[tamanhoEmail - 1] != '.' ){
         ehValido = true;
     }
 
