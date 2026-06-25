@@ -26,16 +26,6 @@ fn trim_text(text: &str) -> String {
     result.trim_end().to_string()
 }
 
-fn validate_name(name: &str) -> bool {
-    for ch in name.chars() {
-        if !ch.is_alphabetic() {
-            println!("Name can only have letters");
-            return false;
-        }
-    }
-    true
-}
-
 fn validate_email(email: &str) -> bool {
     let mut has_at = false;
     let mut has_dot = false;
