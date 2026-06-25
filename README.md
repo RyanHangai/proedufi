@@ -1,4 +1,9 @@
-# Proedufi
+<h1 align="center">Proefudi</h1>
+
+<p align="center">
+<a href="README.pt.md">Portugues</a>
+</p>
+
 
 > **WORK IN PROGRESS:** This software is currently in active early development. The features listed below are planned for the future and are not yet implemented!
 
