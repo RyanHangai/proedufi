@@ -1,9 +1,9 @@
 <h1 align="center">Proefudi</h1>
 
 <p align="center">
-<a href="README.pt.md">Portugues</a>
+    <a href="README.md">English</a>
+    <a href="README.pt.md">Portugues</a>
 </p>
-
 
 > **EM DESENVOLVIMENTO:** Este software está atualmente em desenvolvimento inicial ativo. As funcionalidades listadas abaixo são planejadas para o futuro e ainda não foram implementadas!
 
