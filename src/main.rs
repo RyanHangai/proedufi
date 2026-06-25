@@ -1,63 +1,63 @@
 use std::io::{self, Write};
 
-fn mensagem_boas_vindas() {
-    println!("Boas vindas ao Proedufi!");
-    println!("O seu app de gestao financeira");
+fn welcome_message() {
+    println!("Welcome to Proedufi!");
+    println!("Your financial management app");
 }
 
-fn limpa_espaco_no_texto(texto: &str) -> String {
-    let trimmed = texto.trim();
+fn trim_text(text: &str) -> String {
+    let trimmed = text.trim();
 
-    let mut resultado = String::new();
-    let mut espaco_entre_letras = false;
+    let mut result = String::new();
+    let mut space_between_words = false;
 
     for ch in trimmed.chars() {
         if ch.is_whitespace() {
-            if !espaco_entre_letras {
-                resultado.push(' ');
-                espaco_entre_letras = true;
+            if !space_between_words {
+                result.push(' ');
+                space_between_words = true;
             }
         } else {
-            resultado.push(ch);
-            espaco_entre_letras = false;
+            result.push(ch);
+            space_between_words = false;
         }
     }
 
-    resultado.trim_end().to_string()
+    result.trim_end().to_string()
 }
 
-fn valida_nome(nome: &str) -> bool {
-    for ch in nome.chars() {
+fn validate_name(name: &str) -> bool {
+    for ch in name.chars() {
         if !ch.is_alphabetic() {
-            println!("O nome so pode ter letras");
+            println!("Name can only have letters");
             return false;
         }
     }
     true
 }
 
-fn valida_email(email: &str) -> bool {
-    let mut tem_arroba = false;
-    let mut tem_ponto = false;
+fn validate_email(email: &str) -> bool {
+    let mut has_at = false;
+    let mut has_dot = false;
 
     for ch in email.chars() {
         if ch == ' ' {
-            println!("Nao pode ter espacos no email");
+            println!("Email cannot have spaces");
             return false;
         }
         if ch == '@' {
-            if tem_arroba {
-                println!("O email nao pode ter dois \"@\" (arroba)");
+            if has_at {
+                println!("Email cannot have two \"@\" (at signs)");
                 return false;
             }
-            tem_arroba = true;
+            has_at = true;
         }
         if ch == '.' {
-            tem_ponto = true;
+            has_dot = true;
         }
     }
 
-    if !tem_arroba || !tem_ponto {
+    if !has_at || !has_dot {
         return false;
     }
 
@@ -68,134 +68,134 @@ fn valida_email(email: &str) -> bool {
     true
 }
 
-fn valida_senha(senha: &str) -> bool {
-    let tamanho = senha.len();
+fn validate_password(password: &str) -> bool {
+    let length = password.len();
 
-    if tamanho < 8 || tamanho > 128 {
-        println!("A senha so pode ter entre 8 a 128 caracteres");
+    if length < 8 || length > 128 {
+        println!("Password must be between 8 and 128 characters");
         return false;
     }
 
-    let mut tem_maiuscula = false;
-    let mut tem_minuscula = false;
-    let mut tem_numero = false;
-    let mut tem_especial = false;
+    let mut has_uppercase = false;
+    let mut has_lowercase = false;
+    let mut has_digit = false;
+    let mut has_special = false;
 
-    for ch in senha.chars() {
+    for ch in password.chars() {
         if ch == ' ' {
-            println!("Nao pode ter espacos na senha");
+            println!("Password cannot have spaces");
             return false;
         }
         if ch.is_uppercase() {
-            tem_maiuscula = true;
+            has_uppercase = true;
         } else if ch.is_lowercase() {
-            tem_minuscula = true;
+            has_lowercase = true;
         } else if ch.is_ascii_digit() {
-            tem_numero = true;
+            has_digit = true;
         } else if ch.is_ascii_punctuation() {
-            tem_especial = true;
+            has_special = true;
         }
     }
 
-    if tem_maiuscula && tem_minuscula && tem_numero && tem_especial {
+    if has_uppercase && has_lowercase && has_digit && has_special {
         true
     } else {
-        println!("A senha tem que ter maiusculas, minusculas, numeros e caracter especial (!@#%$&*)");
+        println!("Password must have uppercase, lowercase, numbers and special character (!@#%$&*)");
         false
     }
 }
 
-fn criar_conta() {
-    println!("Voce escolheu criar uma conta");
-    println!("[0] Para voltar");
+fn create_account() {
+    println!("You chose to create an account");
+    println!("[0] To go back");
 
-    let mut nome = String::new();
+    let mut name = String::new();
     let mut email = String::new();
-    let mut senha = String::new();
+    let mut password = String::new();
 
-    print!("Digite seu nome: ");
+    print!("Enter your name: ");
     io::stdout().flush().unwrap();
-    let mut entrada = String::new();
-    io::stdin().read_line(&mut entrada).unwrap();
-    let entrada = limpa_espaco_no_texto(&entrada);
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    let input = trim_text(&input);
 
-    if entrada == "0" {
-        println!("Voce Voltou!\n");
+    if input == "0" {
+        println!("You went back!\n");
         return;
-    } else if entrada.is_empty() {
-        println!("Digite o seu nome primeiro!");
-    } else if entrada.len() > 60 {
-        println!("Nome muito extenso, digite seu nome real!");
-    } else if !valida_nome(&entrada) {
-        println!("O nome so pode ter letras");
+    } else if input.is_empty() {
+        println!("Enter your name first!");
+    } else if input.len() > 60 {
+        println!("Name too long, enter your real name!");
+    } else if !validate_name(&input) {
+        println!("Name can only have letters");
     } else {
-        nome = entrada;
+        name = input;
     }
 
-    print!("Digite seu email: ");
+    print!("Enter your email: ");
     io::stdout().flush().unwrap();
-    let mut entrada = String::new();
-    io::stdin().read_line(&mut entrada).unwrap();
-    let entrada = limpa_espaco_no_texto(&entrada);
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    let input = trim_text(&input);
 
-    if entrada == "0" {
-        println!("Voce Voltou!\n");
+    if input == "0" {
+        println!("You went back!\n");
         return;
-    } else if entrada.is_empty() {
-        println!("Digite o seu email primeiro!");
-    } else if !valida_email(&entrada) {
-        println!("Digite um email valido");
+    } else if input.is_empty() {
+        println!("Enter your email first!");
+    } else if !validate_email(&input) {
+        println!("Enter a valid email");
     } else {
-        email = entrada;
+        email = input;
     }
 
-    print!("Digite uma senha: ");
+    print!("Enter a password: ");
     io::stdout().flush().unwrap();
-    let mut entrada = String::new();
-    io::stdin().read_line(&mut entrada).unwrap();
-    let entrada = limpa_espaco_no_texto(&entrada);
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    let input = trim_text(&input);
 
-    if entrada == "0" {
-        println!("Voce Voltou!\n");
+    if input == "0" {
+        println!("You went back!\n");
         return;
-    } else if entrada.is_empty() {
-        println!("Digite o seu email primeiro!");
-    } else if !valida_senha(&entrada) {
+    } else if input.is_empty() {
+        println!("Enter your email first!");
+    } else if !validate_password(&input) {
         println!();
     } else {
-        senha = entrada;
+        password = input;
     }
 }
 
 fn main() {
-    mensagem_boas_vindas();
+    welcome_message();
 
     loop {
-        println!("Escolha uma opcao:");
-        println!("[1] Criar conta");
-        println!("[2] Fazer login");
-        println!("[3] Continuar sem conta");
-        println!("[0] Sair!");
+        println!("Choose an option:");
+        println!("[1] Create account");
+        println!("[2] Log in");
+        println!("[3] Continue without account");
+        println!("[0] Exit!");
 
-        let mut escolha = String::new();
-        io::stdin().read_line(&mut escolha).unwrap();
-        let escolha: i32 = match escolha.trim().parse() {
+        let mut choice = String::new();
+        io::stdin().read_line(&mut choice).unwrap();
+        let choice: i32 = match choice.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Escolha uma opcao valida");
+                println!("Choose a valid option");
                 continue;
             }
         };
 
-        match escolha {
-            1 => criar_conta(),
-            2 => println!("Faca login na sua conta"),
+        match choice {
+            1 => create_account(),
+            2 => println!("Log into your account"),
             3 => println!("Ok!"),
             0 => {
-                println!("Ate a proxima!");
+                println!("See you next time!");
                 break;
             }
-            _ => println!("Escolha uma opcao valida"),
+            _ => println!("Choose a valid option"),
         }
     }
 }
