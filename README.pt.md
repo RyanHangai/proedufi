@@ -1,4 +1,4 @@
-<h1 align="center">Proefudi</h1>
+<h1 align="center">ProEduFi</h1>
 
 <p align="center">
     <a href="README.md">English</a> |
